@@ -4,13 +4,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+CU&display=swap');
 
 body {
-  background-color: whitesmoke;
+  background-color: white;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Playwright Cuba',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url('r_girlalone_yoga.svg'), url('r_girlalone.svg');
+  background-position: bottom left, bottom right;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 30%, 30%;
 }
 
 code {
