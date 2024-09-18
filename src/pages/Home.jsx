@@ -76,7 +76,7 @@ const Home = () => {
         
         {notes.length > 0 && (
           notes.map((note, index) => (
-            <div key={index} className='relative border rounded-lg p-4 bg-white hover:shadow-[5px_5px_0px_0px_#1a202c] transition-shadow duration-470 group overflow-hidden' onClick={() => viewNote(index)}>
+            <div key={index} className='relative border rounded-lg p-4 bg-white hover:shadow-[5px_5px_0px_0px_#1a202c] hover:cursor-pointer hover:bg-slate-50 transition-shadow duration-470 group overflow-hidden' onClick={() => viewNote(index)}>
               <h2 className='text-xl font-semibold'>{note.title.slice(0, 12)}{note.title.length > 12 ? '...' : ''}</h2>
               <p className='mt-2'>{note.note.slice(0, 25)}{note.note.length > 25 ? '...' : ''}</p>
               <div className={cn('absolute flex gap-5 bottom-2 right-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300', isMobile && "opacity-100")}>
