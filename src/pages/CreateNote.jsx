@@ -2,6 +2,7 @@ import { ImagePlus } from 'lucide-react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
+import { useMediaQuery } from "usehooks-ts";
 
 const imageUrls = [
     'studying.png',
@@ -11,8 +12,9 @@ const imageUrls = [
 ];
 
 const CreateNote = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const [title, setTitle] = useState('');
-  const [bgColor, setBgColor] = useState('transparent');
   const [imageidx, setImageidx] = useState(null); // Changed initial value to null
   const [note, setNote] = useState('');
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const CreateNote = () => {
 
   const saveNote = () => {
     if (title && note) {
-      const newNote = { title, note, imageidx, bgColor };
+      const newNote = { title, note, imageidx };
       const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
       storedNotes.push(newNote);
       localStorage.setItem('notes', JSON.stringify(storedNotes));
@@ -31,13 +33,14 @@ const CreateNote = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center h-[100vh] bg-[bgColor]'>
-      <div className='w-[40%] flex flex-col gap-5'>
+    <div className='flex flex-col justify-center items-center h-[100vh]'>
+      <div className={cn("w-[40%] flex flex-col gap-5", isMobile && "w-[90%] mb-[7rem] mt-10")}>
         <div className='flex gap-4'>
           <div
             className={cn(
-              'bg-white border-[#616366] border-[1px] rounded-lg text-[#616366] flex flex-col items-center justify-center transition-all duration-300 ease-in-out',
-              isSettingIcon ? 'h-[7rem] w-full' : 'h-[7rem] w-[7rem]'
+              'bg-white border-[#616366] border-[1px] rounded-lg text-[#616366] flex flex-col items-center justify-center transition-all duration-300 ease-in-out mt-[5rem]',
+              isSettingIcon ? 'h-[7rem] w-full' : 'h-[7rem] w-[7rem]',
+              isMobile && isSettingIcon && "h-[15rem]"
             )}
             role='button'
             onClick={() => setIssettingIcon(!isSettingIcon)} // Toggle state on click
@@ -59,7 +62,7 @@ const CreateNote = () => {
                 </div>
             ) : (
               <div className='flex '>
-                <div className='grid grid-cols-4 gap-2'>
+                <div className={cn('grid grid-cols-4 gap-2', isMobile && "grid-cols-2") }>
                   {imageUrls.map((url, index) => (
                     <img
                       key={index}

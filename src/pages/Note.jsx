@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from "usehooks-ts";
 
 const imageUrls = [
   'https://i.postimg.cc/43QJPH8x/studying.png',
@@ -11,6 +12,7 @@ const imageUrls = [
 ];
 
 const Note = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const { index } = useParams();
   const [note, setNote] = useState(null);
   const navigate = useNavigate();
@@ -32,8 +34,8 @@ const Note = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-[100vh] bg-[bgColor]">
-      <div className="w-[40%] flex flex-col gap-5">
+    <div className="flex flex-col justify-center items-center min-h-[100vh]">
+      <div className={cn("w-[40%] flex flex-col gap-5 my-10", isMobile && "w-[90%] mb-[7rem]")}>
         <div className="flex flex-col gap-10">
           <div
             className="bg-transparent border-[#616366] border-[1px] rounded-lg text-[#616366] flex flex-col items-center justify-center transition-all duration-300 ease-in-out h-[7rem] w-[7rem]" >
@@ -46,7 +48,7 @@ const Note = () => {
           <h1 className="flex gap-2 items-center text-[21px] font-semibold w-full">
             {note.title}
           </h1>
-          <p className="flex gap-2 items-center text-[16px] w-full h-[14rem] text-start">
+          <p className="flex gap-2 items-center text-[16px] w-full text-start">
             {" "}
             {note.note}{" "}
           </p>
